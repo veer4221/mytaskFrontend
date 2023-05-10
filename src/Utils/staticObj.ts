@@ -1,4 +1,4 @@
-export { FieldTypes, COLUMN_NAMES, sidebarObject, profileInfo, SECRET_KEY };
+export { FieldTypes, COLUMN_NAMES, sidebarObject, profileInfo, SECRET_KEY, baseURLProj };
 const FieldTypes = {
   TEXT: "text",
   NUMBER: "number",
@@ -13,6 +13,7 @@ const FieldTypes = {
   TIME: "time",
   CHECKBOX: "checkbox",
 };
+const baseURLProj = "http://16.16.127.4:5000";
 const COLUMN_NAMES = {
   ACTIVE_TASK: "Our Active Task",
   HIGH_PRIORITY_TASK: "HIGH PRIORITY",

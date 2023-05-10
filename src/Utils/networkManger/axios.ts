@@ -1,11 +1,12 @@
 /* eslint-disable */
 import axios from "axios";
+import { baseURLProj } from "../staticObj";
 
 const token = localStorage.getItem("token");
 // const api = "http://3.105.94.206:3000/admin/api";
 
 // http://3.105.94.206:3000/
-const api = "http://localhost:5000/api";
+const api = baseURLProj + "/api";
 
 const axiosIntance = axios.create({
   baseURL: api,

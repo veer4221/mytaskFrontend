@@ -32,12 +32,10 @@ const DynamicForm = ({ formData, isReRender }: DynamicFormProps) => {
     // alert();
     switch (formData["form-slug"]) {
       case "timeline-form-add":
-        values.id = ` ${values.title}-${[...Array(20)].map((_) => (Math.random() * 10) | 0).join("") + ((1 + Math.random() * 9) | 0)}`
+        values.id = ` ${values.title}-${[...Array(20)].map((_) => (Math.random() * 10) | 0).join("") + ((1 + Math.random() * 9) | 0)}`;
 
-        if (values.imageUrl != "")
-          values.imageUrl = values.imageUrl.split(" ").join("").split(",")
-        if (values.videoURL != "")
-          values.videoURL = values.videoURL.split(" ").join("").split(",")
+        if (values.imageUrl != "") values.imageUrl = values.imageUrl.split(" ").join("").split(",");
+        if (values.videoURL != "") values.videoURL = values.videoURL.split(" ").join("").split(",");
         if (values.tagsList != "")
           values.tagsList = values.tagsList.split(",").map((d: any, i: any) => {
             return {
@@ -45,9 +43,9 @@ const DynamicForm = ({ formData, isReRender }: DynamicFormProps) => {
               name: d,
             };
           });
-        const currentobj = JSON.parse(localStorage.getItem("currentTask") || "{}")
-        currentobj.taskSubTimeLine.push(values)
-        localStorage.setItem("currentTask", JSON.stringify(currentobj))
+        const currentobj = JSON.parse(localStorage.getItem("currentTask") || "{}");
+        currentobj.taskSubTimeLine.push(values);
+        localStorage.setItem("currentTask", JSON.stringify(currentobj));
 
         return;
       case "login-form-user":
@@ -123,7 +121,7 @@ const DynamicForm = ({ formData, isReRender }: DynamicFormProps) => {
                   </div>
 
                   <div className="row">
-                    <div className={`col - 12 d - flex justify - content - ${formData?.submitButton?.position || "end"} `}>
+                    <div className={`col-12 d-flex justify-content-${formData?.submitButton?.position || "end"} `}>
                       {formData?.resetButton?.required && (
                         <button className="btn mt-3 " type="reset" style={formData?.resetButton?.style}>
                           <span className="ml-3 ">{formData?.resetButton?.label}</span>

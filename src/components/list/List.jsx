@@ -3,6 +3,7 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { MdOutlineNoteAdd, MdOutlineRemoveCircle } from "react-icons/md";
 import "./list.css";
 import { useNavigate } from "react-router-dom";
+import { baseURLProj } from "../../Utils/staticObj";
 const List = ({ listObj, index, indexObj, setMainField }) => {
   const navigate = useNavigate();
   let newArr = indexObj;
@@ -56,10 +57,7 @@ const List = ({ listObj, index, indexObj, setMainField }) => {
             index,
             {
               taskName: data || `${`[${index}]`} ${data}`,
-              slug:
-                data.split(" ").join("-") +
-                "-" +
-                `${[...Array(20)].map((_) => (Math.random() * 10) | 0).join`` + ((1 + Math.random() * 9) | 0)}`,
+              slug: data.split(" ").join("-") + "-" + `${[...Array(20)].map((_) => (Math.random() * 10) | 0).join`` + ((1 + Math.random() * 9) | 0)}`,
               TaskStatus: "TODO",
               Priority: "",
               startTime: "",
@@ -71,7 +69,7 @@ const List = ({ listObj, index, indexObj, setMainField }) => {
               Comment: [
                 {
                   Date: "2/5/2023 12:14:9",
-                  image: "http://localhost:5000/image/TaskImage/task1682502613970.png",
+                  image: baseURLProj + "/image/TaskImage/task1682502613970.png",
                   text: "this is comment....this is comment....this is comment....this is comment....this is comment....this is comment....this is comment....this is comment....this is comment....this is comment...",
                 },
               ],
