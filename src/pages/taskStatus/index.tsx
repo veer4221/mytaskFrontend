@@ -3,13 +3,16 @@
 import React, { useEffect, useRef, useState } from "react";
 // import "./App.css";
 import List from "../../components/list/List";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { BiExport, BiImport } from "react-icons/bi";
 import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 // import { DAD } from "./components/DAD";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { COLUMN_NAMES } from "../../Utils/staticObj";
+import { AiOutlineRollback } from "react-icons/ai";
+import { MdArrowBackIos } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 // import React from "react";
@@ -17,6 +20,7 @@ import { COLUMN_NAMES } from "../../Utils/staticObj";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 function TaskStatus() {
+    const navigate = useNavigate();
     console.log("first", JSON.parse(localStorage.getItem("timelines")).find(d => d.TimelineName === localStorage.getItem("timelineNow")).MainField)
     const [MainField, setMainField] = useState(
         JSON.parse(localStorage.getItem("timelines")).find(d => d.TimelineName === localStorage.getItem("timelineNow")).MainField === undefined
@@ -92,15 +96,27 @@ function TaskStatus() {
     };
     return (
         <>
-
-            <div className="m-2" style={{ background: "#0807078f", minHeight: "70vh" }} >
+            <div className="container-fluid" >
+                <div className="row">
+                    <div className="col-12 m-2" style={{ color: "white" }}>
+                        <div onClick={() => navigate("/en/MainTimeLine")}><MdArrowBackIos color="white" size={20} />MainTimeline</div>
+                    </div>
+                </div>
+            </div>
+            <div className="m-2" style={{ background: "#0807078f", minHeight: "70vh", overflowX: "scroll" }} >
                 <Container fluid>
                     <Row>
                         <Col
-                            md={12}
+                            md={6}
                             style={{ display: "flex", justifyContent: "space-between" }}
                         >
-                            <h1 style={{ color: "#267ba7" }}>MY TaskList</h1>
+                            <h1 style={{ color: "#267ba7" }}>TaskList OF {localStorage.getItem("timelineNow")}</h1>
+
+                        </Col>
+                        <Col
+                            md={6}
+                            style={{ display: "flex", justifyContent: "end" }}
+                        >
                             <div>
                                 <BiImport
                                     size={50}

@@ -57,7 +57,10 @@ const List = ({ listObj, index, indexObj, setMainField }) => {
             index,
             {
               taskName: data || `${`[${index}]`} ${data}`,
-              slug: data.split(" ").join("-") + "-" + `${[...Array(20)].map((_) => (Math.random() * 10) | 0).join`` + ((1 + Math.random() * 9) | 0)}`,
+              slug:
+                data.split(" ").join("-") +
+                "-" +
+                `${[...Array(20)].map((_) => (Math.random() * 10) | 0).join`` + ((1 + Math.random() * 9) | 0)}`,
               TaskStatus: "TODO",
               Priority: "",
               startTime: "",
@@ -90,7 +93,7 @@ const List = ({ listObj, index, indexObj, setMainField }) => {
   return (
     <>
       <ol style={{ listStyleType: "none" }}>
-        <li>
+        <li style={{ minWidth: "350px" }}>
           <div>
             <div className="">
               {listObj?.subTask.length !== 0 ? (
@@ -100,7 +103,7 @@ const List = ({ listObj, index, indexObj, setMainField }) => {
                   <FaAngleUp onClick={onToggleFunc} size={20} color="white" />
                 )
               ) : (
-                <>&nbsp;&nbsp;&nbsp;&nbsp;</>
+                <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>
               )}
               <MdOutlineNoteAdd size={20} color="#17d5005e" onClick={onAddTask} />
               <MdOutlineRemoveCircle size={20} color="#ff0000a8" onClick={removeTask} />

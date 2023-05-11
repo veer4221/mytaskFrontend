@@ -35,7 +35,9 @@ const DynamicForm = ({ formData, isReRender }: DynamicFormProps) => {
         values.id = ` ${values.title}-${[...Array(20)].map((_) => (Math.random() * 10) | 0).join("") + ((1 + Math.random() * 9) | 0)}`;
 
         if (values.imageUrl != "") values.imageUrl = values.imageUrl.split(" ").join("").split(",");
+        else values.imageUrl = [];
         if (values.videoURL != "") values.videoURL = values.videoURL.split(" ").join("").split(",");
+        else values.videoURL = [];
         if (values.tagsList != "")
           values.tagsList = values.tagsList.split(",").map((d: any, i: any) => {
             return {
@@ -49,7 +51,7 @@ const DynamicForm = ({ formData, isReRender }: DynamicFormProps) => {
 
         return;
       case "login-form-user":
-        (await submitLoginFunction(values)) && navigate("/en/TransactionForm");
+        (await submitLoginFunction(values)) && navigate("/en/MainTimeLine");
         return;
       case "Transaction-form":
         (await submitTransactionFunction(values)) && navigate("/en/");

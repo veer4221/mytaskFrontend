@@ -6,14 +6,34 @@ import { baseURLProj, profileInfo } from "../../Utils/staticObj";
 import { GrAdd } from "react-icons/gr";
 import PopUPForm from "./PopUp";
 import { useNavigate } from "react-router-dom";
+import { MdBackup, MdFileUpload } from "react-icons/md";
+import { FaCloudDownloadAlt, FaFileUpload } from "react-icons/fa";
+import { AiOutlineCloudSync } from "react-icons/ai";
+import { BsCloudUpload } from "react-icons/bs";
+import { getUserTimelineAPI, insertUserTimelineAPI } from "../../Utils/networkManger/api";
+// import { wait } from "@testing-library/user-event/dist/utils";
 
 // import { profileInfo } from "../utils/staticObjects";
 const MainTimeLine = () => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [TIMELINES, setTIMELINES] = React.useState([]);
+
+  async function getData() {
+    const data = await getUserTimelineAPI()
+    console.log("data", data?.data?.timelines?.object)
+    const timelineObj = JSON.parse(localStorage.getItem("timelines") || data?.data?.timelines?.object || "[]")
+    localStorage.setItem("timelines", JSON.stringify(timelineObj))
+    setTIMELINES(timelineObj);
+  }
+
+  async function backupdata() {
+    const res = await insertUserTimelineAPI({ object: localStorage.getItem("timelines") })
+    console.log("res", res)
+  }
+  // getData()
   useEffect(() => {
-    setTIMELINES(JSON.parse(localStorage.getItem("timelines") || "[]"));
+    setTIMELINES(JSON.parse(localStorage.getItem("timelines") || "[]"))
   }, [localStorage.getItem("timelines")]);
 
   return (
@@ -21,9 +41,18 @@ const MainTimeLine = () => {
       <div className="row">
         <div className="col-12 d-flex justify-content-between pt-3" style={{ color: "#ebe5e5b5" }}>
           <h3 style={{ color: "#ebe5e5b5" }}>MainTimeLine</h3>
-          <button className="btn" onClick={() => setOpen(true)}>
-            <span style={{ fontSize: "40px", color: "white" }}>+</span>
-          </button>
+          <div>
+
+            <button className="btn" onClick={() => getData()}>
+              <span style={{ fontSize: "27px", color: "white" }}><AiOutlineCloudSync /></span>
+            </button>
+            <button className="btn" onClick={() => backupdata()}>
+              <span style={{ fontSize: "27px", color: "white" }}><MdFileUpload /></span>
+            </button>
+            <button className="btn" onClick={() => setOpen(true)}>
+              <span style={{ fontSize: "40px", color: "white" }}>+</span>
+            </button>
+          </div>
         </div>
       </div>
       <PopUPForm setOpen={setOpen} open={open} />
@@ -33,7 +62,7 @@ const MainTimeLine = () => {
             <div className="row ">
               {Array.isArray(TIMELINES) &&
                 TIMELINES.map((d: any, i: number) => (
-                  <div className="col-4  mt-2 ">
+                  <div className="col-md-4  mt-2 ">
                     <div className="container-fluid card-app ">
                       <div className="row">
                         <div className="col-12 d-flex justify-content-center">
@@ -50,6 +79,7 @@ const MainTimeLine = () => {
                             <button
                               className="btn btn-info"
                               onClick={() => {
+                                // console.log("data", d.TimelineName)
                                 localStorage.setItem("timelineNow", d.TimelineName);
                                 return navigate("/en/TaskList");
                               }}

@@ -18,8 +18,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/en" element={<AuthOutlate />}>
-            <Route path="TransactionForm" element={<TransactionForm />} />
             <Route path="MainTimeLine" element={<MainTimeLine />} />
+            <Route path="TransactionForm" element={<TransactionForm />} />
             <Route path="TaskList" element={<TaskStatus />} />
             <Route path="Taskinfo" element={<TaskInfo />} />
             <Route path="ActiveTask" element={<DAD />} />

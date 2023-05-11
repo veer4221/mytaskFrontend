@@ -19,7 +19,7 @@ axiosIntance.interceptors.request.use((req) => {
   const getToken = localStorage.getItem("token");
 
   if (getToken) {
-    req.headers.Authorization = getToken;
+    req.headers.Authorization = "Bearer" + " " + getToken;
   }
   return req;
 });
